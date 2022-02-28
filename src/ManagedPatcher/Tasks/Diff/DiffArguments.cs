@@ -4,11 +4,11 @@ namespace ManagedPatcher.Tasks.Diff
 {
     public class DiffArguments : TaskArguments
     {
-        public ConfigFile Config { get; }
+        public string Input { get; }
         
-        public DiffArguments(ConfigFile config)
+        public DiffArguments(ConfigFile config, string input) : base(config)
         {
-            Config = config;
+            Input = input;
         }
     }
 }

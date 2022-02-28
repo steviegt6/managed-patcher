@@ -4,11 +4,11 @@ namespace ManagedPatcher.Tasks.Decompile
 {
     public class DecompileArguments : TaskArguments
     {
-        public ConfigFile Config { get; }
-        
-        public DecompileArguments(ConfigFile config)
+        public string Input { get; }
+
+        public DecompileArguments(ConfigFile config, string input) : base(config)
         {
-            Config = config;
+            Input = input;
         }
     }
 }

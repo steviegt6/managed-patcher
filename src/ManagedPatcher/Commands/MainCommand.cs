@@ -5,7 +5,12 @@ using CliFx;
 using CliFx.Attributes;
 using CliFx.Infrastructure;
 using ManagedPatcher.Config;
+using ManagedPatcher.Tasks.Decompile;
+using ManagedPatcher.Tasks.Diff;
+using ManagedPatcher.Tasks.Patch;
+using ManagedPatcher.Tasks.Setup;
 using Newtonsoft.Json;
+using Spectre.Console;
 
 namespace ManagedPatcher.Commands
 {
@@ -26,17 +31,75 @@ namespace ManagedPatcher.Commands
         [CommandOption("config", 'c', Description = "The path to the configuration file.")]
         public string ConfigPath { get; init; } = "config.json";
 
+        [CommandOption("mode", 'm', Description = "The ManagedPatcher mode (decompile, diff, patch, setup).")]
+        public string Mode { get; set; } = "";
+
+        [CommandOption("input", Description = "Input used for various modes.")]
+        public string Input { get; set; } = "";
+
         public async ValueTask ExecuteAsync(IConsole console)
         {
             if (!File.Exists(ConfigPath))
                 throw new FileNotFoundException($"No file found at path \"{ConfigPath}\"!");
 
-            ConfigFile? file = JsonConvert.DeserializeObject<ConfigFile>(await File.ReadAllTextAsync(ConfigPath));
+            ConfigFile? configFile = JsonConvert.DeserializeObject<ConfigFile>(await File.ReadAllTextAsync(ConfigPath));
 
-            if (file is null)
+            if (configFile is null)
                 throw new InvalidOperationException($"Could not parse contents of file into a {nameof(ConfigFile)}!");
-            
-            await console.Output.WriteLineAsync("");
+
+            if (string.IsNullOrEmpty(Mode) || !ValidateMode(Mode))
+            {
+                Mode = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .Title("Choose a mode:")
+                        .AddChoices("setup", "decompile", "diff", "patch")
+                );
+            }
+
+            switch (Mode)
+            {
+                case "setup":
+                {
+                    using SetupTask task = new();
+                    await task.ExecuteAsync(new SetupArguments(configFile, Input));
+                    break;
+                }
+
+                case "decompile":
+                {
+                    using DecompileTask task = new();
+                    await task.ExecuteAsync(new DecompileArguments(configFile, Input));
+                    break;
+                }
+
+                case "diff":
+                {
+                    using DiffTask task = new();
+                    await task.ExecuteAsync(new DiffArguments(configFile, Input));
+                    break;
+                }
+
+                case "patch":
+                {
+                    using PatchTask task = new();
+                    await task.ExecuteAsync(new PatchArguments(configFile, Input));
+                    break;
+                }
+            }
+        }
+
+        private static bool ValidateMode(string mode)
+        {
+            switch (mode)
+            {
+                case "patch":
+                case "decompile":
+                case "diff":
+                case "setup":
+                    return true;
+            }
+
+            return false;
         }
     }
 }

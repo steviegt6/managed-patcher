@@ -4,11 +4,11 @@ namespace ManagedPatcher.Tasks.Patch
 {
     public class PatchArguments : TaskArguments
     {
-        public ConfigFile Config { get; }
+        public string Input { get; }
         
-        public PatchArguments(ConfigFile config)
+        public PatchArguments(ConfigFile config, string input) : base(config)
         {
-            Config = config;
+            Input = input;
         }
     }
 }

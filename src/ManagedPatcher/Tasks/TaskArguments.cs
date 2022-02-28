@@ -1,9 +1,17 @@
-﻿namespace ManagedPatcher.Tasks
+﻿using ManagedPatcher.Config;
+
+namespace ManagedPatcher.Tasks
 {
     /// <summary>
-    ///     Represents a task's arguments. This raw abstraction is currently for future-proofing.
+    ///     Represents a task's arguments.
     /// </summary>
     public abstract class TaskArguments
     {
+        public ConfigFile Config { get; }
+        
+        protected TaskArguments(ConfigFile config)
+        {
+            Config = config;
+        }
     }
 }
