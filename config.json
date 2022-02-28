@@ -1,0 +1,22 @@
+{
+    // Whether decompilation of a project is allowed (used only for C# projects).
+    "decompilationAllowed": true,
+
+    // Defines the different types of diff options.
+    "diffs": {
+        // Diffs the src/decompiled directory and src/example-patched directory.
+        "Diff Patched": ["src/decompiled", "src/example-patched"],
+
+        // Diffs the src/example-patched directory and the src/example-mod directory.
+        "Diff Mod": ["src/example-patched", "src/example-mod"]
+    },
+
+    // Defines the different types of patch options.
+    "patches": {
+        // Patches the src/example-patched directory using patches stored in patches/example-patched.
+        "Patch Patched": ["src/example-patched", "patches/example-patched"],
+
+        // Patches the src/example-mod directory using patches stored in patches/example-mod.
+        "Patch Mod": ["src/example-mod", "patches/example-mod"]
+    }
+}
