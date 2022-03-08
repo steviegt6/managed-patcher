@@ -1,46 +1,27 @@
 {
-    // Settings for decompilation.
+    // THIS IS A CONFIG USED FOR *TESTING*, DELETE THIS AND USE A COPY OF example.config.json!!
+
+
     "decompilation": {
-        // Whether decompilation is enabled.
         "decompilationEnabled": "true",
-
-        //  Decompilation tasks, used as keys in assemblyPaths and decompilationPaths.
+        "languageVersion": "CSharp7_3",
+        "frameworkVersion": ".NETFramework,Version=v4.5",
         "decompileTasks": [
-            "example" // Defines an "example" task
+            "vanilla"
         ],
-
-        // The paths to assemblies that will be decompiled.
         "assemblyPaths": {
-            // The "example" task will decompile the file at "./input/Example.dll".
-            // Set this to an empty string ("") to prompt user input.
-            // This can be overridden with the "--input" command option (valid for "setup" and "decompile").
-            // Example: dotnet ManagedPatcher.dll decompile --input "example=my/path/here.dll;other=other/path/here.dll".
-            // Inputs are separated with ";", keys are defined with "key=value".
-            "example": "./input/Example.dll"
+            "vanilla": ""
         },
-
-        // The paths an assembly should be decompiled to.
         "decompilationPaths": {
-            // The "example" task will output to "./sources/decompiled".
-            "example": "./src/decompiled/"
+            "vanilla": "./src/decompiled/"
         }
     },
-
-    // Defines the different types of diff options.
     "diffs": {
-        // Diffs the src/decompiled directory and src/example-patched directory.
-        "Diff Patched": ["src/decompiled", "src/example-patched"],
-
-        // Diffs the src/example-patched directory and the src/example-mod directory.
-        "Diff Mod": ["src/example-patched", "src/example-mod"]
+        "Diff Patched": ["src/decompiled", "src/vanilla-patched"],
+        "Diff Mod": ["src/vanilla-patched", "src/modded"]
     },
-
-    // Defines the different types of patch options.
     "patches": {
-        // Patches the src/example-patched directory using patches stored in patches/example-patched.
-        "Patch Patched": ["src/example-patched", "patches/example-patched"],
-
-        // Patches the src/example-mod directory using patches stored in patches/example-mod.
-        "Patch Mod": ["src/example-mod", "patches/example-mod"]
+        "Patch Patched": ["src/vanilla-patched", "patches/vanilla-patched"],
+        "Patch Mod": ["src/modded", "patches/modded"]
     }
 }

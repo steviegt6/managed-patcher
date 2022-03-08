@@ -4,7 +4,7 @@ using ManagedPatcher.Config;
 
 namespace ManagedPatcher.Commands
 {
-    [Command]
+    [Command("patch")]
     public class PatchCommand : BaseCommand
     {
         public override ValueTask ExecuteAsync(ConfigFile config)

@@ -56,6 +56,9 @@ namespace ManagedPatcher.Tasks.Decompile
                 string asmPath = decomp.AssemblyPaths[key];
                 string decompPath = decomp.DecompilationPaths[key];
                 
+                if (Directory.Exists(decompPath))
+                    Directory.Delete(decompPath, true);
+                
                 Directory.CreateDirectory(decompPath);
 
                 if (string.IsNullOrEmpty(asmPath))
@@ -63,7 +66,15 @@ namespace ManagedPatcher.Tasks.Decompile
                     if (args.PathOverrides.ContainsKey(asmPath)) 
                         asmPath = args.PathOverrides[key];
                     else if (!Program.IsServer)
-                        asmPath = AnsiConsole.Ask<string>($"Enter the path to the assembly \"{key}\"");
+                    {
+                        asmPath = AnsiConsole.Ask<string>($"Enter the path to the assembly \"{key}\":");
+
+                        if (asmPath.StartsWith('"') && asmPath.EndsWith('"'))
+                        {
+                            asmPath = asmPath.Remove(0, 1);
+                            asmPath = asmPath.Remove(asmPath.Length - 1, 1);
+                        }
+                    }
                     else
                         throw new InvalidOperationException("Cannot prompt user input in a server environment.");
                 }

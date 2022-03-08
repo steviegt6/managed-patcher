@@ -4,7 +4,7 @@ using ManagedPatcher.Config;
 
 namespace ManagedPatcher.Commands
 {
-    [Command]
+    [Command("diff")]
     public class DiffCommand : BaseCommand
     {
         public override ValueTask ExecuteAsync(ConfigFile config)

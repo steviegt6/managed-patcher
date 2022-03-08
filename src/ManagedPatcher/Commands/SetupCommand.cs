@@ -7,7 +7,7 @@ using ManagedPatcher.Utilities;
 
 namespace ManagedPatcher.Commands
 {
-    [Command]
+    [Command("setup")]
     public class SetupCommand : BaseCommand
     {
         /// <summary>

@@ -7,7 +7,7 @@ using ManagedPatcher.Utilities;
 
 namespace ManagedPatcher.Commands
 {
-    [Command]
+    [Command("decompile")]
     public class DecompileCommand : BaseCommand
     {
         /// <summary>
