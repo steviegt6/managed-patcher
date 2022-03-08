@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace ManagedPatcher.Config
@@ -7,21 +6,18 @@ namespace ManagedPatcher.Config
     public class ConfigFile
     {
         /// <summary>
-        ///     Whether decompilation of a project is allowed (used only for C# projects).
+        ///     Settings for decompilation.
         /// </summary>
-        [JsonProperty("decompilationAllowed")]
-        public bool DecompilationAllowed;
+        [JsonProperty("decompilation")] public DecompilationConfig Decompilation = new();
 
         /// <summary>
         ///     Defines the different types of diff options.
         /// </summary>
-        [JsonProperty("diffs")]
-        public Dictionary<string, string[]> Diffs = new();
+        [JsonProperty("diffs")] public Dictionary<string, string[]> Diffs = new();
 
         /// <summary>
         ///     Defines the different types of patch options.
         /// </summary>
-        [JsonProperty("patches")]
-        public Dictionary<string, string[]> Patches = new();
+        [JsonProperty("patches")] public Dictionary<string, string[]> Patches = new();
     }
 }

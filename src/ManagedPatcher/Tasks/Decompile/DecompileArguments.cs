@@ -1,14 +1,15 @@
-﻿using ManagedPatcher.Config;
+﻿using System.Collections.Generic;
+using ManagedPatcher.Config;
 
 namespace ManagedPatcher.Tasks.Decompile
 {
     public class DecompileArguments : TaskArguments
     {
-        public string Input { get; }
-
-        public DecompileArguments(ConfigFile config, string input) : base(config)
+        public readonly Dictionary<string, string> PathOverrides;
+        
+        public DecompileArguments(ConfigFile config, Dictionary<string, string> pathOverrides) : base(config)
         {
-            Input = input;
+            PathOverrides = pathOverrides;
         }
     }
 }

@@ -1,14 +1,15 @@
-﻿using ManagedPatcher.Config;
+﻿using System.Collections.Generic;
+using ManagedPatcher.Config;
 
 namespace ManagedPatcher.Tasks.Setup
 {
     public class SetupArguments : TaskArguments
     {
-        public string Input { get; }
+        public readonly Dictionary<string, string> PathOverrides;
         
-        public SetupArguments(ConfigFile config, string input) : base(config)
+        public SetupArguments(ConfigFile config, Dictionary<string, string> pathOverrides) : base(config)
         {
-            Input = input;
+            PathOverrides = pathOverrides;
         }
     }
 }

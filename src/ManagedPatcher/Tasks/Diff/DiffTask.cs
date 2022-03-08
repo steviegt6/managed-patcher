@@ -7,12 +7,6 @@ namespace ManagedPatcher.Tasks.Diff
     {
         public override async Task ExecuteAsync(DiffArguments args)
         {
-            if (!args.Config.Diffs.ContainsKey(args.Input))
-            {
-                AnsiConsole.MarkupLine($"[red]ERROR:[/] Cannot execute diff task \"{args.Input}\" as no such input exists!");
-                return;
-            }
-            
             await Task.CompletedTask;
         }
     }
