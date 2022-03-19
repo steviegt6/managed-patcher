@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using ManagedPatcher.Tasks.Decompile;
 using ManagedPatcher.Tasks.Diff;
 using ManagedPatcher.Tasks.Patch;
@@ -21,12 +22,12 @@ namespace ManagedPatcher.Tasks.Setup
             AnsiConsole.WriteLine("Executing patch tasks...");
 
             using (PatchTask patcher = new()) 
-                await patcher.ExecuteAsync(new PatchArguments(args.Config));
+                await patcher.ExecuteAsync(new PatchArguments(args.Config, new List<string>()));
             
             AnsiConsole.WriteLine("Executing diff tasks...");
 
             using (DiffTask differ = new())
-                await differ.ExecuteAsync(new DiffArguments(args.Config));
+                await differ.ExecuteAsync(new DiffArguments(args.Config, new List<string>()));
 
             await Task.CompletedTask;
         }

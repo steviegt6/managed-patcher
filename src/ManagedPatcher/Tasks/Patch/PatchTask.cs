@@ -16,6 +16,9 @@ namespace ManagedPatcher.Tasks.Patch
 
             foreach ((string? name, string[]? paths) in config.Patches)
             {
+                if (args.Patches.Count != 0 && !args.Patches.Contains(name))
+                    continue;
+                
                 if (paths.Length != 2)
                     throw new InvalidOperationException("Cannot perform patch task when two paths are not provided.");
 

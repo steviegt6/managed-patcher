@@ -1,15 +1,21 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using CliFx.Attributes;
 using ManagedPatcher.Config;
+using ManagedPatcher.Tasks.Diff;
 
 namespace ManagedPatcher.Commands
 {
     [Command("diff")]
     public class DiffCommand : BaseCommand
     {
-        public override ValueTask ExecuteAsync(ConfigFile config)
+        [CommandOption("input")]
+        public string Input { get; init; } = "";
+        
+        public override async ValueTask ExecuteAsync(ConfigFile config)
         {
-            throw new System.NotImplementedException();
+            using DiffTask differ = new();
+            await differ.ExecuteAsync(new DiffArguments(config, Input.Split(';').ToList()));
         }
     }
 }

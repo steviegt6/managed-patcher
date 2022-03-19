@@ -1,0 +1,2 @@
+Change setup command to only handle copying over files and applying initial patches.
+Scripts for diffing and patching everything.

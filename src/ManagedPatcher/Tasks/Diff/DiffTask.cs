@@ -16,6 +16,9 @@ namespace ManagedPatcher.Tasks.Diff
 
             foreach ((string? name, string[]? paths) in config.Diffs)
             {
+                if (args.Diffs.Count != 0 && !args.Diffs.Contains(name))
+                    continue;
+                    
                 if (paths.Length != 3)
                     throw new InvalidOperationException("Cannot perform diff task when three paths are not provided.");
 

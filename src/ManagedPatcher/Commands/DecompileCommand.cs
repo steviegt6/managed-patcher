@@ -13,6 +13,7 @@ namespace ManagedPatcher.Commands
         /// <summary>
         ///     Overrides for <see cref="DecompilationConfig.AssemblyPaths"/>.
         /// </summary>
+        [CommandOption("input")]
         public string Input { get; init; } = "";
 
         public override async ValueTask ExecuteAsync(ConfigFile config)
