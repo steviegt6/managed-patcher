@@ -37,10 +37,10 @@
 
     // Defines the different types of patch options.
     "patches": {
-        // Patches the src/example-patched directory using patches stored in patches/example-patched.
-        "Patch Patched": ["src/example-patched", "patches/example-patched"],
+        // Copies sources/decompiled to sources/example-patched, then patches the src/example-patched directory using patches stored in patches/example-patched.
+        "Patch Patched": ["src/example-patched", "patches/example-patched", "sources/decompiled"],
 
-        // Patches the src/example-mod directory using patches stored in patches/example-mod.
-        "Patch Mod": ["src/example-mod", "patches/example-mod"]
+        // Copies sources/example-patched to sources/example-mod, then patches the src/example-mod directory using patches stored in patches/example-mod.
+        "Patch Mod": ["src/example-mod", "patches/example-mod", "sources/example-patched"]
     }
 }
