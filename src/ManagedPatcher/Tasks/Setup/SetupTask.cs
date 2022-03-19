@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using ManagedPatcher.Tasks.Decompile;
-using ManagedPatcher.Tasks.Patch;
 using Spectre.Console;
 
 namespace ManagedPatcher.Tasks.Setup

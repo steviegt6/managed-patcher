@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Spectre.Console;
 
 namespace ManagedPatcher.Tasks.Diff
 {

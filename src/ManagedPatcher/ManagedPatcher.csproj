@@ -14,4 +14,9 @@
       <PackageReference Include="Spectre.Console" Version="0.43.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\PatchReviewer\DiffPatch\DiffPatch.csproj" />
+      <ProjectReference Include="..\PatchReviewer\PatchReviewer\PatchReviewer.csproj" />
+    </ItemGroup>
+
 </Project>
