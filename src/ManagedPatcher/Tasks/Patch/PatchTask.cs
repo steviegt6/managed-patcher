@@ -25,8 +25,8 @@ namespace ManagedPatcher.Tasks.Patch
                 AnsiConsole.MarkupLine($"[gray]Executing patch task \"{name}\": {patches} -> {directory}[/]");
 
                 await DirectoryPatcher.PatchDirectories(
-                    new DirectoryInfo(directory),
-                    new DirectoryInfo(patches)
+                    new DirectoryInfo(patches),
+                    new DirectoryInfo(directory)
                 );
                 
                 AnsiConsole.MarkupLine($"[gray]Finished patch task \"{name}\"[/]");

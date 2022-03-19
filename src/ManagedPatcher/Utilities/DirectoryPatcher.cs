@@ -12,7 +12,9 @@ namespace ManagedPatcher.Utilities
         public static async Task PatchDirectories(DirectoryInfo patches, DirectoryInfo destination)
         {
             patches.Create();
-            destination.Create();
+
+            if (!destination.Exists)
+                return;
             
             AnsiConsole.MarkupLine($"[gray]Patching directory \"{destination}\" from \"{patches}\".[/]");
 

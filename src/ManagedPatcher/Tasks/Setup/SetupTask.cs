@@ -17,7 +17,7 @@ namespace ManagedPatcher.Tasks.Setup
                 using DecompileTask task = new();
                 await task.ExecuteAsync(new DecompileArguments(args.Config, args.PathOverrides));
             }
-            
+
             AnsiConsole.WriteLine("Executing patch tasks...");
 
             using (PatchTask patcher = new()) 
