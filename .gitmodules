@@ -1,0 +1,3 @@
+[submodule "src/DiffPatch"]
+	path = src/DiffPatch
+	url = https://github.com/webmilio/DiffPatch
