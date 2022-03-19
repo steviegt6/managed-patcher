@@ -31,7 +31,7 @@ namespace ManagedPatcher.Utilities
             modified.Create();
             patches.Create();
 
-            AnsiConsole.MarkupLine($"[gray]Diffing \"{original}\" against \"{modified}\" using {patches}.[/]");
+            // AnsiConsole.MarkupLine($"[gray]Diffing \"{original}\" against \"{modified}\" using {patches}.[/]");
 
             FileInfo[] originalFiles = original.EnumerateFiles("*.*", SearchOption.AllDirectories).ToArray();
             FileInfo[] modifiedFiles = modified.EnumerateFiles("*.*", SearchOption.AllDirectories).ToArray();
