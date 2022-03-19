@@ -16,3 +16,8 @@ Please take a look at `example.config.json` to understand the configuration and 
 When applying a patch, the source directory is deleted and replaced with the base directory (the third item in the patch task array), which then has its patches applied.
 
 Diffing just compares two directories and spits them out to a directory housing the generated patches.
+
+# The Featured Example
+This template contains an example in which the game _PickCrafter_ is patched. It is quite simple.
+
+Some scripts for setting up your local clone, as well as diffing and patching, have been provided. They are self-explanatory.
