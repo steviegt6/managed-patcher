@@ -18,7 +18,7 @@ namespace ManagedPatcher.Utilities
             
             AnsiConsole.MarkupLine($"[gray]Patching directory \"{destination}\" from \"{patches}\".[/]");
 
-            FileInfo[] files = patches.GetFiles("*.patch", SearchOption.AllDirectories);
+            FileInfo[] files = patches.GetFiles("*.patch*", SearchOption.AllDirectories);
 
             if (files.Length == 0)
                 return;
@@ -55,7 +55,8 @@ namespace ManagedPatcher.Utilities
             {
                 destFile = new FileInfo(Path.Combine(
                     destFile.DirectoryName!,
-                    Path.GetFileNameWithoutExtension(destFile.Name)));
+                    Path.GetFileNameWithoutExtension(destFile.Name))
+                );
 
                 switch (extension)
                 {

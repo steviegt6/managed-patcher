@@ -1,0 +1,9 @@
+@@ -99,6 +99,8 @@
+ 		BlockLevelManager.AddBlocksToStack(ListOfAllBlockIndex[Random.Range(0, ListOfAllBlocks.Count)], 1);
+ 	}
+ 
++// Secondary patch (modded)
++
+ 	private void AddBulkBlocksToStack()
+ 	{
+ 		for (int i = 0; i < 5000; i++)

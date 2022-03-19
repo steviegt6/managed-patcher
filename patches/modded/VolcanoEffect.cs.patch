@@ -1,0 +1,8 @@
+@@ -1,5 +1,7 @@
+ using UnityEngine;
+ 
++// Another modded patch (modded)
++
+ public class VolcanoEffect : MonoBehaviour
+ {
+ 	public AudioClip VolcanoAmbience;
