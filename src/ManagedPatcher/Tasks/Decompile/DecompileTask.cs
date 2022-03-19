@@ -47,6 +47,12 @@ namespace ManagedPatcher.Tasks.Decompile
             {
                 AnsiConsole.MarkupLine($"[gray]DEBUG: Executing decompilation task: \"{key}\"[/]");
 
+                if (new DirectoryInfo(decomp.DecompilationPaths[key]).Exists)
+                {
+                    AnsiConsole.MarkupLine($"[yellow]WARNING: Skipping decompilation task: \"{key}\"[/]");
+                    continue;
+                }
+
                 if (!decomp.AssemblyPaths.ContainsKey(key))
                     throw new KeyNotFoundException($"No assembly path key provided: \"{key}\"");
                 
