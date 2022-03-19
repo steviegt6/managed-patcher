@@ -24,10 +24,10 @@ namespace ManagedPatcher.Tasks.Setup
             using (PatchTask patcher = new()) 
                 await patcher.ExecuteAsync(new PatchArguments(args.Config, new List<string>()));
             
-            AnsiConsole.WriteLine("Executing diff tasks...");
+            /*AnsiConsole.WriteLine("Executing diff tasks...");
 
             using (DiffTask differ = new())
-                await differ.ExecuteAsync(new DiffArguments(args.Config, new List<string>()));
+                await differ.ExecuteAsync(new DiffArguments(args.Config, new List<string>()));*/
 
             await Task.CompletedTask;
         }

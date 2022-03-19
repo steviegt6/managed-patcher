@@ -7,7 +7,7 @@ namespace ManagedPatcher.Utilities
         public static void CopyDirectory(DirectoryInfo from, DirectoryInfo to, bool recurse)
         {
             if (to.Exists)
-                return;
+                to.Delete(true);
 
             DirectoryInfo[] dirs = from.GetDirectories();
             to.Create();

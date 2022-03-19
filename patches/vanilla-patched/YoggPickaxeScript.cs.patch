@@ -1,0 +1,9 @@
+@@ -3,6 +3,8 @@
+ using EZCameraShake;
+ using UnityEngine;
+ 
++// Test patch 1 (vanilla-patched)
++
+ public class YoggPickaxeScript : MonoBehaviour
+ {
+ 	[SerializeField]

@@ -28,9 +28,7 @@ namespace ManagedPatcher.Utilities
         public static async Task DiffFolders(DirectoryInfo original, DirectoryInfo modified, DirectoryInfo patches)
         {
             original.Create();
-            
-            InOutUtils.CopyDirectory(original, modified, true);
-
+            modified.Create();
             patches.Create();
 
             AnsiConsole.MarkupLine($"[gray]Diffing \"{original}\" against \"{modified}\" using {patches}.[/]");

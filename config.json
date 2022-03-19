@@ -21,7 +21,7 @@
         "Diff Mod": ["sources/vanilla-patched", "sources/modded", "patches/modded"]
     },
     "patches": {
-        "Patch Patched": ["sources/vanilla-patched", "patches/vanilla-patched"],
-        "Patch Mod": ["sources/modded", "patches/modded"]
+        "Patch Patched": ["sources/vanilla-patched", "patches/vanilla-patched", "sources/decompiled"],
+        "Patch Mod": ["sources/modded", "patches/modded", "sources/vanilla-patched"]
     }
 }

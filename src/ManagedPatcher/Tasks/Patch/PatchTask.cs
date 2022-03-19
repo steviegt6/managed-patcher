@@ -19,13 +19,20 @@ namespace ManagedPatcher.Tasks.Patch
                 if (args.Patches.Count != 0 && !args.Patches.Contains(name))
                     continue;
                 
-                if (paths.Length != 2)
-                    throw new InvalidOperationException("Cannot perform patch task when two paths are not provided.");
+                if (paths.Length != 3)
+                    throw new InvalidOperationException("Cannot perform patch task when three paths are not provided.");
 
                 string directory = paths[0];
                 string patches = paths[1];
+                string original = paths[2];
                 
-                AnsiConsole.MarkupLine($"[gray]Executing patch task \"{name}\": {patches} -> {directory}[/]");
+                AnsiConsole.MarkupLine($"[gray]Executing patch task \"{name}\": {patches} -> {directory} (base: {original})[/]");
+
+                DirectoryInfo dir = new(directory);
+                DirectoryInfo origDir = new(original);
+                
+                // Reset the files for proper patching.
+                InOutUtils.CopyDirectory(origDir, dir, true);
 
                 await DirectoryPatcher.PatchDirectories(
                     new DirectoryInfo(patches),
