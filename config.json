@@ -13,15 +13,15 @@
             "vanilla": ""
         },
         "decompilationPaths": {
-            "vanilla": "./src/decompiled/"
+            "vanilla": "./sources/decompiled/"
         }
     },
     "diffs": {
-        "Diff Patched": ["src/decompiled", "src/vanilla-patched"],
-        "Diff Mod": ["src/vanilla-patched", "src/modded"]
+        "Diff Patched": ["sources/decompiled", "sources/vanilla-patched", "patches/vanilla-patched"],
+        "Diff Mod": ["sources/vanilla-patched", "sources/modded", "patches/modded"]
     },
     "patches": {
-        "Patch Patched": ["src/vanilla-patched", "patches/vanilla-patched"],
-        "Patch Mod": ["src/modded", "patches/modded"]
+        "Patch Patched": ["sources/vanilla-patched", "patches/vanilla-patched"],
+        "Patch Mod": ["sources/modded", "patches/modded"]
     }
 }

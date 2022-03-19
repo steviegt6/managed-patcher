@@ -8,7 +8,7 @@ using Spectre.Console;
 
 namespace ManagedPatcher.Utilities
 {
-    public class DirectoryDiffer
+    public static class DirectoryDiffer
     {
         public const string PatchExtension = ".patch";
         public const string DeleteExtension = ".d";
@@ -17,7 +17,7 @@ namespace ManagedPatcher.Utilities
         /// <summary>
         ///     A list of files that should be ignored while diffing.
         /// </summary>
-        public readonly List<string> FilesToIgnoreDiff = new() { ".dll" };
+        public static readonly List<string> FilesToIgnoreDiff = new() { ".dll" };
 
         /// <summary>
         ///     Diffs two directories.
@@ -25,7 +25,7 @@ namespace ManagedPatcher.Utilities
         /// <param name="original">The original files.</param>
         /// <param name="modified">The modified files.</param>
         /// <param name="patches">The output patch directory.</param>
-        public async Task DiffFolders(DirectoryInfo original, DirectoryInfo modified, DirectoryInfo patches)
+        public static async Task DiffFolders(DirectoryInfo original, DirectoryInfo modified, DirectoryInfo patches)
         {
             original.Create();
             modified.Create();
@@ -48,18 +48,29 @@ namespace ManagedPatcher.Utilities
 
             LineMatchedDiffer differ = new() {MaxMatchOffset = 5};
 
-            await toDiff.DoEnumerableAsync(p => Diff(differ, original.FullName, modified.FullName, patches.FullName, p));
-            await toCreate.DoAsync(p => WriteCreatePatch(modified.FullName, patches.FullName, p));
-            await toDelete.DoAsync(p => WriteDeletePatch(patches.FullName, p));
+            foreach (string diff in toDiff)
+                await Diff(
+                    differ,
+                    original.FullName,
+                    modified.FullName,
+                    patches.FullName,
+                    diff
+                );
+
+            foreach (string create in toCreate)
+                await WriteCreatePatch(modified.FullName, patches.FullName, create);
+
+            foreach (string delete in toDelete)
+                await WriteDeletePatch(patches.FullName, delete);
 
             await Task.CompletedTask;
         }
 
-        private static List<string> SelectFilter(ICollection<string> collection, FileSystemInfo root)
+        private static List<string> SelectFilter(IReadOnlyCollection<FileInfo> collection, FileSystemInfo root)
         {
             List<string> items = new(collection.Count);
             items.AddRange(collection
-                .Select(x => StripPath(x, root.FullName))
+                .Select(x => StripPath(x.FullName, root.FullName))
                 .Where(y => !y.StartsWith('.') && !y.StartsWith("bin") && !y.StartsWith("obj"))
             );
 
@@ -68,20 +79,29 @@ namespace ManagedPatcher.Utilities
 
         private static string StripPath(string path, string root) => path.Remove(0, root.Length + 1);
 
-        private static async Task Diff(Differ differ, string originalRoot, string destinationRoot, string patchRoot,
-            string shortName)
+        private static async Task Diff(
+            Differ differ,
+            string originalRoot, 
+            string destinationRoot,
+            string patchRoot,
+            string shortName
+            )
         {
             try
             {
-                // Console.WriteLine($"Diff data: {originalRoot}, {destinationRoot}. {patchRoot}, {shortName}");
+                AnsiConsole.MarkupLine($"DEBUG: Diff data: {originalRoot}, {destinationRoot}. {patchRoot}, {shortName}");
 
                 string destinationPath = Path.Combine(destinationRoot, shortName);
 
                 if (!File.Exists(destinationPath))
                     return;
 
-                PatchFile diff = differ.Diff(Path.Combine(originalRoot, shortName), destinationPath, 3,
-                    includePaths: false);
+                PatchFile diff = differ.DiffFile(
+                    Path.Combine(originalRoot, shortName),
+                    destinationPath,
+                    3,
+                    includePaths: false
+                );
 
                 if (!diff.IsEmpty)
                 {
@@ -91,7 +111,7 @@ namespace ManagedPatcher.Utilities
             }
             catch (Exception e)
             {
-                AnsiConsole.MarkupLine($"[red]ERROR: Diff \"{shortName}\" failed due to exception:");
+                AnsiConsole.MarkupLine($"[red]ERROR: Diff \"{shortName}\" failed due to exception:[/]");
                 AnsiConsole.WriteException(e);
             }
         }
@@ -131,7 +151,7 @@ namespace ManagedPatcher.Utilities
             }
             catch (Exception e)
             {
-                AnsiConsole.MarkupLine($"[red]ERROR: Patch \"{displayPath}\" failed due to exception:");
+                AnsiConsole.MarkupLine($"[red]ERROR: Patch \"{displayPath}\" failed due to exception:[/]");
                 AnsiConsole.WriteException(e);
             }
         }

@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using ManagedPatcher.Tasks.Decompile;
+using ManagedPatcher.Tasks.Diff;
+using ManagedPatcher.Tasks.Patch;
 using Spectre.Console;
 
 namespace ManagedPatcher.Tasks.Setup
@@ -16,14 +18,16 @@ namespace ManagedPatcher.Tasks.Setup
                 await task.ExecuteAsync(new DecompileArguments(args.Config, args.PathOverrides));
             }
             
-            /*AnsiConsole.WriteLine("Executing patch tasks...");
+            AnsiConsole.WriteLine("Executing patch tasks...");
 
-            foreach (string patchTask in args.Config.Patches.Keys)
-            {
-                using PatchTask task = new();
-                await task.ExecuteAsync(new PatchArguments(args.Config));
-            }*/
+            using (PatchTask patcher = new()) 
+                await patcher.ExecuteAsync(new PatchArguments(args.Config));
             
+            AnsiConsole.WriteLine("Executing diff tasks...");
+
+            using (DiffTask differ = new())
+                await differ.ExecuteAsync(new DiffArguments(args.Config));
+
             await Task.CompletedTask;
         }
     }

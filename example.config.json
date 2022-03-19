@@ -28,11 +28,11 @@
 
     // Defines the different types of diff options.
     "diffs": {
-        // Diffs the src/decompiled directory and src/example-patched directory.
-        "Diff Patched": ["src/decompiled", "src/example-patched"],
+        // Diffs the src/decompiled directory and src/example-patched directory. Patches are output to the patches/example-patched directory.
+        "Diff Patched": ["src/decompiled", "src/example-patched", "patches/example-patched"],
 
-        // Diffs the src/example-patched directory and the src/example-mod directory.
-        "Diff Mod": ["src/example-patched", "src/example-mod"]
+        // Diffs the src/example-patched directory and the src/example-mod directory. Patches are output to the patches/example-mod directory.
+        "Diff Mod": ["src/example-patched", "src/example-mod", "patches/example-mod"]
     },
 
     // Defines the different types of patch options.

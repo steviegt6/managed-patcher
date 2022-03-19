@@ -15,8 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\PatchReviewer\DiffPatch\DiffPatch.csproj" />
-      <ProjectReference Include="..\PatchReviewer\PatchReviewer\PatchReviewer.csproj" />
+      <ProjectReference Include="..\DiffPatch\DiffPatch\DiffPatch.csproj" />
     </ItemGroup>
 
 </Project>

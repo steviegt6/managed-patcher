@@ -4,7 +4,7 @@ namespace ManagedPatcher.Tasks.Patch
 {
     public class PatchArguments : TaskArguments
     {
-        public PatchArguments(ConfigFile config, string input) : base(config)
+        public PatchArguments(ConfigFile config) : base(config)
         {
         }
     }
