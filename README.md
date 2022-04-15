@@ -4,7 +4,7 @@ A helpful tool for patching files, specifically designed for modifying C# applic
 This is a template repository containing the _ManagedPatcher_ source code and an example implementation for applying patches to `vanilla-patched` and `modded`.
 
 ## Purpose
-_ManagedPatcher_ serves as a (mostly) easy way to patch files and distribute patches without revealing most of the file being patched. This is very similar to git's concept of diffs and patches, but doesn't rely on git for creating and applying patches. This is adapted from (_tModLoader_)[https://github.com/tModLoader/tModLoader]'s patching system.
+_ManagedPatcher_ serves as a (mostly) easy way to patch files and distribute patches without revealing most of the file being patched. This is very similar to git's concept of diffs and patches, but doesn't rely on git for creating and applying patches. This is adapted from [_tModLoader_](https://github.com/tModLoader/tModLoader)'s patching system.
 
 ## Understanding the Patch Cycle
 When you first clone a project using _ManagedPatcher_, you shouldn't have access to any of the source files. You will either need to supply these yourself or, if the project permits it, enter a patch to a C# assembly (this is the only C#-specific part of the program) which may be automatically decompiled.
